@@ -1,0 +1,61 @@
+﻿@page
+@model IndexModel
+@{
+}
+<div class="section">
+    <div class="columns is-multiline">
+        @{
+            foreach (var p in Model.Products)
+            {
+                <div class="column is-3-desktop is-6-mobile">
+
+                            <a asp-page="Product" asp-route-name="@p.Name.Replace(" ", "-")">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <figure class="image is-4by3">
+                                            <img src="~/images/@p.ImageName" alt="Placeholder image" />
+                                        </figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="title is-size-5">
+                                            @p.Name  @p.Value
+                                        </p>
+                                        <p class="subtitle">
+                                            @p.Description
+                                        </p>
+
+
+                                        @{
+                                            string cssClass = "";
+                                            string message = "";
+
+                                            if (p.StockCount == 0)
+                                            {
+                                                cssClass = "is-danger";
+                                                message = "Out of Stock";
+                                            }
+
+                                            else if (p.StockCount <= 10)
+                                            {
+                                                cssClass = "is-warning";
+                                                message = "Low on Stock";
+                                            }
+                                        }
+
+                                        @if (p.StockCount <= 10)
+                                        {
+                                            <div class="notification is-paddingless has-text-centered @cssClass">
+                                                @message
+                                            </div>
+                                        }
+
+
+                                    </div>
+                                </div>
+
+                            </a>
+                </div>
+            }
+        }
+    </div>
+</div>

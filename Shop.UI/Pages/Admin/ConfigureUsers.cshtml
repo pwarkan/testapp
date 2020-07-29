@@ -1,0 +1,21 @@
+﻿@page
+@model Shop.UI.Pages.Admin.ConfigureUsersModel
+@{
+}
+<div class="content-header">
+    <h4 class="title is-4">Configure Users</h4>
+    <span class="separator"></span>
+</div>
+
+    <div class="content-body">
+        <div id="app" class="container">
+            <input v-model="username" />
+            <button @@click="createUser()">Create</button>
+        </div>
+    </div>
+
+
+        @section scripts{
+            <script src="~/js/admin/users.js"></script>
+        }
+

@@ -1,0 +1,124 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="language" content="en-EN">
+    <title>ADMIN E-SHOP PANEL</title>
+    <link href="https://fonts.googleapis.com/icon?family=Poppins" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/app.css">
+</head>
+<body>
+    <!-- START NAV -->
+    <nav class="navbar columns is-fixed-top" role="navigation" aria-label="main navigation" id="app-header">
+        <div class="navbar-brand column is-2 is-paddingless">
+            <a class="navbar-item" asp-page="/Admin/Index">
+                ADMIN PANEL
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="touchMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="touchMenu">
+
+        </div>
+
+        <div id="navMenu" class="navbar-menu column is-hidden-touch">
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <a class="button is-white" asp-controller="Account" asp-action="Logout">
+                        <span class="icon">
+                            <i class="fa fa-lg fa-power-off"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="navbar-item has-dropdown">
+                    <a class="navbar-link">
+                        <figure class="image avatar is-32x32">
+                            <img class="is-rounded" src="~/images/user1.png">
+                        </figure>
+
+                        &nbsp; Hi, Admin
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>        <!-- END NAV -->
+
+    <div class="columns" id="app-content">
+        <div class="column is-2 is-fullheight is-hidden-touch" id="navigation">
+            <aside class="menu">
+                <p class="menu-label is-hidden-touch">
+                    General
+                </p>
+                <ul class="menu-list">
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "Manager")).Succeeded)
+                    {
+                        <li>
+                            <a class="is-active" asp-page="/Admin/Index">
+                                <span class="icon">
+                                    <i class="fa fa-home"></i>
+                                </span> Products
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" asp-page="/Admin/Stocks">
+                                <span class="icon">
+                                    <i class="fa fa-star"></i>
+                                </span> Stock
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" asp-page="/Admin/Orders">
+                                <span class="icon">
+                                    <i class="fa fa-desktop"></i>
+                                </span> Order Management
+                            </a>
+                        </li>
+                    }
+                    </ul>
+
+                <p class="menu-label is-hidden-touch">
+                    Admin Pages
+                </p>
+                <ul class="menu-list">
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "Admin")).Succeeded)
+                    {
+                        <li>
+                            <a class="" asp-page="/Admin/ConfigureUsers">
+                                <span class="icon">
+                                    <i class="fa fa-users"></i>
+                                </span> Configure Users
+                            </a>
+                        </li>
+                    }
+                    </ul>
+                <ul class="menu-list">
+                    <li>
+                        <a class="" asp-page="/Index">
+                            <span class="icon">
+                                <i class="fa fa-backward"></i>
+                            </span> Back to Main Page
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        <div class="column is-10" id="page-content">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+@RenderSection("Scripts", required: false)
+</html>

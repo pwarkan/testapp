@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-shop</title>
+
+
+    <link href="~/lib/bulma-0.9.0/css/bulma.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" asp-page="/Index">
+                <img src="~/images/eeebd6f03cea172ad149f2095d575de0.png">
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+
+            <div class="navbar-start">
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="navbar-item" asp-page="/Admin/Index">Admin</a>
+                }
+            </div>
+
+
+            <div class="navbar-end">
+                <vc:cart view="Small"></vc:cart>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="navbar-item" asp-controller="Account" asp-action="Logout">Sign Out</a>
+                }
+                else
+                {
+                    <a class="navbar-item" asp-page="/Accounts/Login">Sign In</a>
+                }
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>Bulma</strong>.
+            </p>
+        </div>
+    </footer>
+
+
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

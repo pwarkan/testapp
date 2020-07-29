@@ -1,0 +1,42 @@
+﻿@page
+@model Shop.UI.Pages.Accounts.LoginModel
+@{
+}
+
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="columns is-centered">
+                        <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                            <form method="post">
+                                <div class="field">
+                                    <label for="" class="label">Username</label>
+                                    <div class="control has-icons-left">
+                                        <input asp-for="Input.Username" placeholder="Username" class="input">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa fa-user"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label for="" class="label">Password</label>
+                                    <div class="control has-icons-left">
+                                        <input type="password" asp-for="Input.Password" placeholder="*******" class="input">
+                                        <span class="icon is-small is-left">
+                                            <i class="fa fa-key"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <button type="submit" class="button is-success">
+                                        Login
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
